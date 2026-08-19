@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BodhiNova AI builds modern software, mobile applications, and AI-powered solutions." />
+  <title>BodhiNova AI | Software, Mobile & AI Solutions</title>
+  <link rel="icon" href="assets/bodhinova-logo-v2.png" />
+  <style>
+    :root {
+      --navy: #07245c;
+      --navy-2: #0d3774;
+      --teal: #16bf9a;
+      --teal-dark: #0c947a;
+      --ink: #10213a;
+      --muted: #66758a;
+      --surface: #f6fbff;
+      --white: #ffffff;
+      --border: #dbe8f0;
+      --shadow: 0 18px 50px rgba(7, 36, 92, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid rgba(22,191,154,.35); outline-offset: 3px; }
+
+    .scroll-progress {
+      position: fixed; inset: 0 auto auto 0; width: 0; height: 3px;
+      z-index: 50; background: linear-gradient(90deg, var(--teal), #53e1c1);
+      box-shadow: 0 0 14px rgba(22,191,154,.55);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(219,232,240,0.75);
+    }
+
+    .nav {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand img {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 15px;
+      box-shadow: 0 7px 20px rgba(7,36,92,.1);
+    }
+
+    .brand span b { color: var(--teal); }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: #34445c;
+    }
+
+    nav a { position: relative; }
+    nav a:not(.nav-cta)::after {
+      content: ""; position: absolute; left: 0; right: 100%; bottom: -8px;
+      height: 2px; border-radius: 2px; background: var(--teal); transition: right .25s ease;
+    }
+    nav a:hover::after, nav a.active::after { right: 0; }
+
+    .menu-toggle {
+      display: none; width: 44px; height: 44px; border: 1px solid var(--border);
+      border-radius: 12px; background: white; color: var(--navy); place-items: center;
+    }
+    .menu-toggle span, .menu-toggle::before, .menu-toggle::after {
+      content: ""; display: block; width: 20px; height: 2px; background: currentColor;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .menu-toggle span { margin: 4px 0; }
+    .menu-toggle.open span { opacity: 0; }
+    .menu-toggle.open::before { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle.open::after { transform: translateY(-6px) rotate(-45deg); }
+
+    .nav-cta, .btn-primary, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-weight: 750;
+      transition: 0.2s ease;
+    }
+
+    .nav-cta {
+      padding: 11px 18px;
+      background: var(--navy);
+      color: white;
+    }
+
+    .nav-cta:hover, .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(7,36,92,.18);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 72px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(22,191,154,.12), transparent 30%),
+        radial-gradient(circle at 15% 10%, rgba(13,55,116,.08), transparent 27%),
+        linear-gradient(180deg, #fbfdff 0%, #ffffff 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 13px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      color: var(--teal-dark);
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 22px 0 20px;
+      font-size: clamp(2.65rem, 6vw, 5.3rem);
+      line-height: .98;
+      letter-spacing: -0.055em;
+      color: var(--navy);
+    }
+
+    h1 .accent { color: var(--teal); }
+
+    .hero p {
+      margin: 0;
+      max-width: 680px;
+      font-size: 1.12rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn-primary {
+      padding: 14px 22px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-2));
+      color: white;
+    }
+
+    .btn-secondary {
+      padding: 14px 22px;
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--navy);
+    }
+
+    .hero-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      text-align: center;
+      position: relative;
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    .hero-card::before, .hero-card::after {
+      content: ""; position: absolute; border-radius: 50%; z-index: -1;
+      background: linear-gradient(135deg, var(--teal), var(--navy-2)); opacity: .16;
+    }
+    .hero-card::before { width: 110px; height: 110px; right: -28px; top: -28px; }
+    .hero-card::after { width: 70px; height: 70px; left: -22px; bottom: 26px; }
+    @keyframes heroFloat { 50% { transform: translateY(-10px); } }
+
+    .hero-card img {
+      width: min(100%, 360px);
+      margin: 0 auto 18px;
+      border-radius: 24px;
+    }
+
+    .hero-card p {
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    section { padding: 84px 0; }
+
+    .section-head {
+      max-width: 700px;
+      margin-bottom: 38px;
+    }
+
+    .section-head .kicker {
+      color: var(--teal-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: .8rem;
+    }
+
+    h2 {
+      margin: 8px 0 14px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--navy);
+    }
+
+    .section-head p { color: var(--muted); margin: 0; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(7,36,92,.05);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    }
+    .service:hover { transform: translateY(-7px); box-shadow: var(--shadow); border-color: #bcded8; }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(7,36,92,.08), rgba(22,191,154,.15));
+      color: var(--navy);
+      font-size: 1.35rem;
+      margin-bottom: 18px;
+    }
+
+    .service h3 {
+      margin: 0 0 9px;
+      color: var(--navy);
+      font-size: 1.24rem;
+    }
+
+    .service p { color: var(--muted); margin: 0 0 16px; }
+
+    .service ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #44546a;
+    }
+
+    .about {
+      background: var(--surface);
+      border-top: 1px solid #edf3f7;
+      border-bottom: 1px solid #edf3f7;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-box {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: white;
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-box .big {
+      font-size: 4rem;
+      line-height: 1;
+      font-weight: 850;
+      color: var(--navy);
+      letter-spacing: -0.06em;
+    }
+
+    .about-box .big span { color: var(--teal); }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 18px;
+    }
+
+    .step {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: white;
+    }
+
+    .step-num {
+      font-size: .78rem;
+      font-weight: 850;
+      color: var(--teal-dark);
+      letter-spacing: .08em;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1.08rem;
+    }
+
+    .step p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+    .work { background: var(--surface); border-block: 1px solid #edf3f7; }
+    .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .work-card {
+      min-height: 330px; padding: 28px; border-radius: 24px; color: white;
+      display: flex; flex-direction: column; justify-content: flex-end; position: relative;
+      overflow: hidden; box-shadow: var(--shadow); isolation: isolate;
+      background: linear-gradient(145deg, #08265f, #10508a);
+    }
+    .work-card:nth-child(2) { background: linear-gradient(145deg, #087c72, #13aa8c); }
+    .work-card:nth-child(3) { background: linear-gradient(145deg, #132d5c, #3669a2); }
+    .work-card::before {
+      content: ""; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%; right: -65px; top: -65px; box-shadow: 0 0 0 34px rgba(255,255,255,.04), 0 0 0 68px rgba(255,255,255,.025); z-index: -1;
+      transition: transform .5s ease;
+    }
+    .work-card:hover::before { transform: scale(1.12) rotate(12deg); }
+    .work-tag { align-self: flex-start; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.14); font-size: .75rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .work-card h3 { margin: 20px 0 8px; font-size: 1.45rem; line-height: 1.2; }
+    .work-card p { margin: 0; color: rgba(255,255,255,.78); }
+
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 26px; }
+    .stat { padding: 22px; border-left: 2px solid var(--teal); background: rgba(255,255,255,.72); border-radius: 0 16px 16px 0; }
+    .stat strong { display: block; font-size: 2rem; line-height: 1; color: var(--navy); letter-spacing: -.04em; }
+    .stat span { color: var(--muted); font-size: .88rem; }
+
+    .faq-list { max-width: 820px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { width: 100%; border: 0; background: transparent; color: var(--navy); padding: 20px 0; display: flex; justify-content: space-between; text-align: left; font-weight: 750; }
+    .faq-question span { color: var(--teal-dark); font-size: 1.3rem; transition: transform .25s ease; }
+    .faq-item.open .faq-question span { transform: rotate(45deg); }
+    .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+    .faq-answer > div { overflow: hidden; }
+    .faq-answer p { color: var(--muted); margin: 0; padding: 0 36px 20px 0; }
+    .faq-item.open .faq-answer { grid-template-rows: 1fr; }
+
+    .notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+    .note {
+      display: flex; gap: 14px; padding: 20px; border: 1px solid var(--border);
+      border-radius: 18px; background: white;
+    }
+    .note-icon {
+      flex: 0 0 38px; height: 38px; display: grid; place-items: center; border-radius: 12px;
+      background: rgba(22,191,154,.12); color: var(--teal-dark); font-weight: 850;
+    }
+    .note strong { display: block; color: var(--navy); margin-bottom: 3px; }
+    .note p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .testimonials { background: var(--surface); border-block: 1px solid #edf3f7; }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .testimonial {
+      margin: 0; padding: 28px; background: white; border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: 0 10px 30px rgba(7,36,92,.05);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .testimonial:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .quote-mark { font-size: 2.8rem; line-height: .7; color: var(--teal); font-family: Georgia, serif; }
+    .testimonial blockquote { margin: 18px 0 22px; color: #3e4f66; font-size: 1rem; }
+    .testimonial figcaption { display: flex; align-items: center; gap: 11px; }
+    .person-mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--teal)); color: white; font-weight: 800; }
+    .testimonial figcaption strong { display: block; color: var(--navy); font-size: .92rem; }
+    .testimonial figcaption span { display: block; color: var(--muted); font-size: .8rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .back-to-top {
+      position: fixed; right: 22px; bottom: 22px; width: 46px; height: 46px; border: 0;
+      border-radius: 50%; background: var(--navy); color: white; box-shadow: var(--shadow);
+      opacity: 0; pointer-events: none; transform: translateY(12px); transition: .25s ease; z-index: 15;
+    }
+    .back-to-top.show { opacity: 1; pointer-events: auto; transform: none; }
+
+    .cta {
+      padding-top: 24px;
+    }
+
+    .cta-card {
+      background:
+        radial-gradient(circle at 90% 10%, rgba(22,191,154,.18), transparent 30%),
+        linear-gradient(135deg, #071f50, #0d3971);
+      border-radius: 30px;
+      color: white;
+      padding: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .cta-card h2 { color: white; margin-top: 0; }
+    .cta-card p { color: #cfdaeb; max-width: 650px; margin-bottom: 0; }
+    .cta-card .btn-secondary {
+      border-color: rgba(255,255,255,.3);
+      color: white;
+      background: rgba(255,255,255,.08);
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 34px 0 44px;
+      color: var(--muted);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .footer-row strong { color: var(--navy); }
+
+    @media (max-width: 900px) {
+      .menu-toggle { display: grid; }
+      nav ul {
+        display: flex; position: absolute; left: 18px; right: 18px; top: 68px; padding: 18px;
+        background: rgba(255,255,255,.98); border: 1px solid var(--border); border-radius: 18px;
+        box-shadow: var(--shadow); flex-direction: column; align-items: stretch; gap: 4px;
+        opacity: 0; visibility: hidden; transform: translateY(-8px); transition: .25s ease;
+      }
+      nav ul.open { opacity: 1; visibility: visible; transform: none; }
+      nav ul a { display: block; padding: 10px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .testimonial-grid, .notes-grid { grid-template-columns: 1fr; }
+      .work-card { min-height: 260px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2,1fr); }
+      .hero { padding-top: 60px; }
+      .hero-card { max-width: 560px; }
+      .cta-card { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 24px, 1120px); }
+      section { padding: 66px 0; }
+      .nav-cta { display: none; }
+      .brand img { width: 54px; height: 54px; }
+      .process-grid { grid-template-columns: 1fr; }
+      .cta-card { padding: 30px 24px; }
+      .hero-card { padding: 22px; }
+      h1 { font-size: 3.05rem; }
+      .stats { grid-template-columns: 1fr; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">
+      <img src="assets/bodhinova-logo-v2.png" alt="BodhiNova AI logo" />
+      <span>BodhiNova <b>AI</b></span>
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Solutions</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a class="nav-cta" href="#contact">Start a Project</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Mindful Technology • Intelligent Solutions</div>
+        <h1>Build smarter.<br><span class="accent">Innovate with AI.</span></h1>
+        <p>
+          BodhiNova AI helps businesses turn ideas into reliable software, modern mobile applications,
+          and practical AI-powered solutions designed for real-world growth.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#services">Explore Our Services</a>
+          <a class="btn-secondary" href="#contact">Discuss Your Idea</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img src="assets/bodhinova-logo-v2.png" alt="BodhiNova AI" />
+        <p>Software Development • Mobile Apps • AI & Automation</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">What We Do</div>
+        <h2>Technology that solves real business problems.</h2>
+        <p>
+          From custom platforms to intelligent automation, we focus on building practical,
+          scalable solutions that are easy to use and ready to grow.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service">
+          <div class="service-icon">⌘</div>
+          <h3>Software Development</h3>
+          <p>Custom web applications and business systems built around your workflow.</p>
+          <ul>
+            <li>Web & SaaS applications</li>
+            <li>Backend systems & APIs</li>
+            <li>eCommerce development</li>
+            <li>Integrations & automation</li>
+          </ul>
+        </article>
+
+        <article class="service">
+          <div class="service-icon">▣</div>
+          <h3>Mobile Development</h3>
+          <p>Modern mobile experiences for customers, employees, and growing digital products.</p>
+          <ul>
+            <li>Android & iOS applications</li>
+            <li>Cross-platform apps</li>
+            <li>API-connected mobile systems</li>
+            <li>App modernization</li>
+          </ul>
+        </article>
+
+        <article class="service">
+          <div class="service-icon">✦</div>
+          <h3>AI Solutions</h3>
+          <p>Practical AI that improves productivity, decisions, and customer experiences.</p>
+          <ul>
+            <li>AI assistants & chatbots</li>
+            <li>Workflow automation</li>
+            <li>Data & intelligent insights</li>
+            <li>AI integration into existing apps</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-box">
+        <div class="big">Bodhi<span>Nova</span></div>
+        <p>
+          <strong>Bodhi</strong> represents awareness and awakening.
+          <strong>Nova</strong> represents new energy, innovation, and transformation.
+        </p>
+      </div>
+
+      <div class="about-copy">
+        <div class="section-head">
+          <div class="kicker">Our Approach</div>
+          <h2>Focused thinking. Thoughtful engineering.</h2>
+        </div>
+        <p>
+          We believe the best technology is not about adding complexity. It is about understanding
+          the problem clearly, choosing the right tools, and building something reliable.
+        </p>
+        <p>
+          BodhiNova AI combines software engineering, mobile development, automation, and artificial
+          intelligence to help organizations work smarter and create better digital experiences.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Solutions in Action</div>
+        <h2>Built around outcomes, not buzzwords.</h2>
+        <p>Examples of the focused digital solutions we create for teams ready to move faster.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card reveal"><span class="work-tag">Operations</span><h3>Intelligent business platforms</h3><p>Connected dashboards and workflows that replace scattered tools and manual handoffs.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Customer Experience</span><h3>Mobile-first products</h3><p>Fast, intuitive applications that make services accessible wherever customers are.</p></article>
+        <article class="work-card reveal"><span class="work-tag">AI Enablement</span><h3>Knowledge that answers back</h3><p>Secure AI assistants grounded in your business content, processes, and expertise.</p></article>
+      </div>
+      <div class="stats reveal" aria-label="Our delivery principles">
+        <div class="stat"><strong data-count="4">0</strong><span>disciplined delivery stages</span></div>
+        <div class="stat"><strong data-count="3">0</strong><span>core technology practices</span></div>
+        <div class="stat"><strong data-count="100" data-suffix="%">0</strong><span>solution-focused approach</span></div>
+        <div class="stat"><strong data-count="1" data-suffix=":1">0</strong><span>collaborative partnership</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">How We Work</div>
+        <h2>Simple process. Clear communication.</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-num">01 • DISCOVER</div>
+          <h3>Understand</h3>
+          <p>We start with your business goals, users, current challenges, and expected outcome.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02 • DESIGN</div>
+          <h3>Plan</h3>
+          <p>We define the right architecture, features, technology stack, and delivery roadmap.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03 • BUILD</div>
+          <h3>Develop</h3>
+          <p>We build in focused stages, test continuously, and keep the solution maintainable.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04 • IMPROVE</div>
+          <h3>Grow</h3>
+          <p>We help improve performance, add features, automate workflows, and introduce AI where useful.</p>
+        </div>
+      </div>
+      <div class="notes-grid reveal" aria-label="Project notes">
+        <div class="note"><div class="note-icon">01</div><div><strong>Start focused</strong><p>Validate the highest-value idea first, then expand with evidence.</p></div></div>
+        <div class="note"><div class="note-icon">02</div><div><strong>Stay transparent</strong><p>Clear milestones, practical decisions, and consistent progress updates.</p></div></div>
+        <div class="note"><div class="note-icon">03</div><div><strong>Build to last</strong><p>Maintainable foundations that support new features and future growth.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Client Perspectives</div>
+        <h2>Partnership people can feel.</h2>
+        <p>Thoughtful collaboration matters just as much as the technology behind the solution.</p>
+      </div>
+      <div class="testimonial-grid">
+        <figure class="testimonial reveal">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>BodhiNova brought clarity to a complex idea and translated it into a practical product roadmap our team could act on.</blockquote>
+          <figcaption><div class="person-mark">PL</div><div><strong>Product Lead</strong><span>Digital platform project</span></div></figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>The communication was straightforward, the decisions were well explained, and every feature stayed connected to a real business need.</blockquote>
+          <figcaption><div class="person-mark">OF</div><div><strong>Operations Founder</strong><span>Workflow automation project</span></div></figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <blockquote>They helped us approach AI sensibly—starting with a useful, measurable workflow instead of adding complexity for its own sake.</blockquote>
+          <figcaption><div class="person-mark">TD</div><div><strong>Technology Director</strong><span>AI enablement project</span></div></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="container">
+      <div class="section-head reveal"><div class="kicker">Frequently Asked</div><h2>Good projects start with clear answers.</h2></div>
+      <div class="faq-list reveal">
+        <div class="faq-item open"><button class="faq-question" aria-expanded="true">What kinds of projects do you take on?<span aria-hidden="true">+</span></button><div class="faq-answer"><div><p>We build custom web platforms, mobile apps, business automations, AI assistants, integrations, and modernization projects for existing products.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" aria-expanded="false">Can you add AI to an existing system?<span aria-hidden="true">+</span></button><div class="faq-answer"><div><p>Yes. We can assess your current stack, identify a useful AI opportunity, and integrate it without requiring a complete rebuild.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" aria-expanded="false">How does a project begin?<span aria-hidden="true">+</span></button><div class="faq-answer"><div><p>We begin with a discovery conversation about the problem, users, goals, and constraints, then recommend a focused first phase and delivery path.</p></div></div></div>
+        <div class="faq-item"><button class="faq-question" aria-expanded="false">Do you support solutions after launch?<span aria-hidden="true">+</span></button><div class="faq-answer"><div><p>Yes. Ongoing support can include monitoring, improvements, new features, automation, performance work, and AI capability upgrades.</p></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="cta-card">
+        <div>
+          <h2>Have an idea? Let's build it.</h2>
+          <p>
+            Whether you need a new software product, a mobile application, system integration,
+            or an AI-powered workflow, BodhiNova AI can help turn the idea into a working solution.
+          </p>
+        </div>
+        <a class="btn-secondary" href="mailto:ajaysolanki.developer@gmail.com">ajaysolanki.developer@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div><strong>BodhiNova AI</strong> — Software • Mobile • Artificial Intelligence</div>
+    <div>© <span id="year"></span> BodhiNova AI</div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">&uarr;</button>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.querySelector('nav ul');
+  navLinks.id = 'navLinks';
+  menuToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', open);
+    menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
+  navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  document.querySelectorAll('.faq-question').forEach(question => question.addEventListener('click', () => {
+    const item = question.closest('.faq-item');
+    question.setAttribute('aria-expanded', item.classList.toggle('open'));
+  }));
+
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+  }), { threshold: .12 });
+  document.querySelectorAll('.reveal, .service, .step, .about-box, .about-copy').forEach(el => {
+    el.classList.add('reveal'); revealObserver.observe(el);
+  });
+
+  const countObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target, target = Number(el.dataset.count), suffix = el.dataset.suffix || '';
+    if (reducedMotion) el.textContent = target + suffix;
+    else {
+      const start = performance.now();
+      const tick = now => {
+        const value = Math.min((now - start) / 900, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - value, 3))) + suffix;
+        if (value < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+    countObserver.unobserve(el);
+  }), { threshold: .6 });
+  document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+  const progress = document.getElementById('scrollProgress');
+  const backToTop = document.getElementById('backToTop');
+  const sections = [...document.querySelectorAll('main section[id]')];
+  const menuLinks = [...document.querySelectorAll('nav a')];
+  const updateScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = `${max ? (scrollY / max) * 100 : 0}%`;
+    backToTop.classList.toggle('show', scrollY > 550);
+    const current = [...sections].reverse().find(section => scrollY >= section.offsetTop - 140);
+    menuLinks.forEach(link => link.classList.toggle('active', current && link.hash === `#${current.id}`));
+  };
+  addEventListener('scroll', updateScroll, { passive: true });
+  updateScroll();
+  backToTop.addEventListener('click', () => scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' }));
+</script>
+</body>
+</html>
