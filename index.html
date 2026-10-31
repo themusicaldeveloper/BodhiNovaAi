@@ -461,6 +461,8 @@
     }
 
     .cta-card h2 { color: white; margin-top: 0; }
+    .contact-actions { display: flex; flex-direction: column; gap: 12px; min-width: 0; max-width: 100%; }
+    .cta-card .contact-actions .btn-secondary { white-space: normal; overflow-wrap: anywhere; text-align: center; }
     .cta-card p { color: #cfdaeb; max-width: 650px; margin-bottom: 0; }
     .cta-card .btn-secondary {
       border-color: rgba(255,255,255,.3);
@@ -541,7 +543,8 @@
       <ul>
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="#work">Solutions</a></li>
+        <li><a href="#work">Projects</a></li>
+        <li><a href="#expertise">Skills</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -658,20 +661,46 @@
   <section class="work" id="work">
     <div class="container">
       <div class="section-head reveal">
-        <div class="kicker">Solutions in Action</div>
-        <h2>Built around outcomes, not buzzwords.</h2>
-        <p>Examples of the focused digital solutions we create for teams ready to move faster.</p>
+        <div class="kicker">Engineering Experience</div>
+        <h2>Complex workflows. Practical solutions.</h2>
+        <p>Piyush Sutariya, a lead full stack engineer now working with BodhiNovaAI, brings over a decade of experience in healthcare, legal technology, ecommerce and enterprise applications. The projects below reflect his previous client engagements and independent work.</p>
       </div>
       <div class="work-grid">
-        <article class="work-card reveal"><span class="work-tag">Operations</span><h3>Intelligent business platforms</h3><p>Connected dashboards and workflows that replace scattered tools and manual handoffs.</p></article>
-        <article class="work-card reveal"><span class="work-tag">Customer Experience</span><h3>Mobile-first products</h3><p>Fast, intuitive applications that make services accessible wherever customers are.</p></article>
-        <article class="work-card reveal"><span class="work-tag">AI Enablement</span><h3>Knowledge that answers back</h3><p>Secure AI assistants grounded in your business content, processes, and expertise.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Legal Technology</span><h3>Legalshark.ca</h3><p>Designed modular application layers within a .NET/NOP platform for legal case management. Built cross-layer APIs for data isolation and custom plugins that extend features without tightly coupling them to the core application.</p><p><strong>Stack:</strong> .NET/NOP, REST APIs, modular architecture, custom plugins.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Healthcare</span><h3>Excelss Inc.</h3><p>Led and mentored a five-person team building a nurse/client management platform. Independently delivered a NestJS and Angular 18 subsystem, integrated Twilio chat, Buzz Communications and SurveyMonkey, and optimized API payloads, database queries and indexes.</p><p><strong>Stack:</strong> PHP, Laravel, jQuery, NestJS, Angular 18, Twilio SDK, third-party APIs.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Data &amp; Analytics</span><h3>HydroGeologic Inc.</h3><p>Built a web platform connected to Python-driven data processing. Moved intensive modeling into asynchronous background workflows with AWS SQS and delivered live analytical dashboards with WebSockets and Highcharts.</p><p><strong>Stack:</strong> Node.js, Angular, Python, AWS SQS, WebSockets, Highcharts.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Social Platform</span><h3>PetBubs</h3><p>Designed a social platform with real-time interaction features, connecting an Angular frontend to Node.js services and MongoDB data storage.</p><p><strong>Stack:</strong> Node.js, Angular, MongoDB, real-time interactions.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Municipal &amp; GIS</span><h3>ECO City Asset Management</h3><p>Built GIS-enabled municipal workflows, connecting application services and mapping capabilities to support city asset management.</p><p><strong>Stack:</strong> PHP, Yii, REST APIs, ArcGIS Maps.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Independent Project · Ongoing</span><h3>FabricAI Fabric Defect Detection</h3><p>Developing computer-vision workflows for fabric images and recorded video, with annotated detections, confidence scores and defect crops. Gradio workflows support inference, pretrained-model fine-tuning, dataset label validation and evaluation, plus CSV and PDF inspection reports.</p><p><strong>Stack:</strong> Python, Ultralytics YOLOv8, OpenCV, Gradio.</p></article>
       </div>
       <div class="stats reveal" aria-label="Our delivery principles">
         <div class="stat"><strong data-count="4">0</strong><span>disciplined delivery stages</span></div>
         <div class="stat"><strong data-count="3">0</strong><span>core technology practices</span></div>
         <div class="stat"><strong data-count="100" data-suffix="%">0</strong><span>solution-focused approach</span></div>
         <div class="stat"><strong data-count="1" data-suffix=":1">0</strong><span>collaborative partnership</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="expertise">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Technical Skills</div>
+        <h2>Depth across the application lifecycle.</h2>
+        <p>Piyush's toolkit spans application architecture, interfaces, data, cloud delivery and computer vision.</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card reveal"><span class="work-tag">Backend</span><h3>Application engineering</h3><p>Node.js, NestJS, Express, PHP, Laravel, REST APIs and modular architecture.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Frontend</span><h3>Interfaces &amp; visualization</h3><p>Angular 2–18, JavaScript, TypeScript, HTML5, CSS3, Highcharts and jQuery.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Data &amp; Messaging</span><h3>Connected systems</h3><p>PostgreSQL, MySQL, MongoDB, Redis, AWS SQS, RabbitMQ and WebSockets.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Cloud &amp; Delivery</span><h3>Infrastructure &amp; deployment</h3><p>AWS EC2, S3, CloudFront, Auto Scaling, Docker, Jenkins and Git.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Project Technologies</span><h3>Platforms &amp; integrations</h3><p>.NET/NOP, custom plugins, PHP Yii, ArcGIS Maps, Twilio SDK, Buzz Communications and SurveyMonkey APIs.</p></article>
+        <article class="work-card reveal"><span class="work-tag">Computer Vision</span><h3>Inspection workflows</h3><p>Python, Ultralytics YOLOv8, OpenCV, Gradio, pretrained-model fine-tuning, dataset label validation, model evaluation and CSV/PDF reporting.</p></article>
+      </div>
+      <div class="section-head reveal" style="margin-top: 40px; margin-bottom: 0;">
+        <h3>Architecture &amp; engineering leadership</h3>
+        <p>Independent subsystem delivery, team mentoring, requirements analysis, estimation, application and solution architecture, reusable UI modules, code reviews, coding standards, Git workflows, API and database optimization, cloud deployment automation, reliability and scaling.</p>
+        <p>Previous experience includes Founder / Technology Lead at Codrain Technolabs (2019–December 2025) and software development and architecture at Credencys Solutions (2015–2019), delivering custom web and mobile applications, enterprise systems, ecommerce and GIS integrations.</p>
       </div>
     </div>
   </section>
@@ -762,7 +791,10 @@
             or an AI-powered workflow, BodhiNova AI can help turn the idea into a working solution.
           </p>
         </div>
-        <a class="btn-secondary" href="mailto:ajaysolanki.developer@gmail.com">ajaysolanki.developer@gmail.com</a>
+        <div class="contact-actions" aria-label="Contact us">
+          <a class="btn-secondary" href="mailto:ajaysolanki.developer@gmail.com">Email: ajaysolanki.developer@gmail.com</a>
+          <a class="btn-secondary" href="https://wa.me/919998922987" target="_blank" rel="noopener noreferrer">WhatsApp: +91 99989 22987</a>
+        </div>
       </div>
     </div>
   </section>

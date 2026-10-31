@@ -19,5 +19,5 @@ You can also upload these files to Netlify, Vercel, cPanel, Hostinger, or any no
 
 IMPORTANT
 ---------
-The demo uses hello@bodhinova.ai in the Contact button.
-Replace it with your real email address when ready.
+Contact email: ajaysolanki.developer@gmail.com
+WhatsApp: +91 99989 22987 (https://wa.me/919998922987)
